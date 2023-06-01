@@ -1,10 +1,15 @@
-import Navbar from './shared/navbar'
+import Navbar from './layout/navbar'
+import Container from './layout/container'
+import SearchBar from './layout/searchBar'
 
 const IndexPage = () => {
   return (
     <div>
       <Navbar />
-      <h1>Index</h1>
+      <SearchBar />
+      <Container>
+        <h1>Index</h1>
+      </Container>
     </div>
   )
 }
