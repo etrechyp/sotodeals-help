@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Container from './layout/container';
+import { Container } from '@mui/material';
 
 const LoginPage = () => {
     const router = useRouter();
