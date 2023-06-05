@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Navbar from "../layout/navbar";
-import AsideMenu from "../layout/asideMenu";
+import Navbar from "../layout/common/navbar";
+import AsideMenu from "../layout/common/asideMenu";
 import Container from "../layout/container";
 
 const CreateAccountPage = () => {

@@ -1,9 +1,13 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Navbar from '../layout/navbar';
-import Container from '../layout/container';
-import AsideMenu from '../layout/asideMenu';
+import Navbar from '../layout/common/navbar';
+import AsideMenu from '../layout/common/asideMenu';
+import LastArticles from '../layout/widgets/lastArticles';
+import {
+    Container,
+    Grid
+} from '@mui/material';
 
 const Dashboardpage = () => {
     const router = useRouter();
@@ -16,22 +20,29 @@ const Dashboardpage = () => {
         },
         dashboardContainer: {
             position : 'fixed',
-            top : '0',
             right : '0',
-            width : '80%',
-            boxSizing : 'border-box'
+            boxSizing : 'border-box',
+            padding: '20px',
+            marginLeft: '210px'
         }
-
     };
-
-    
 
     return (
         <div>
             <Navbar />
+
+
             <AsideMenu />
+
+
             <Container style={styles.dashboardContainer}>
-                <h1>Dashboard</h1>
+                <Grid>
+                    <h1>Dashboard</h1>
+                    <p>Dashboard page content</p>
+                </Grid>
+                <Grid>
+                    <LastArticles />
+                </Grid>
             </Container>
         </div>
     );

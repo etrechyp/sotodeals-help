@@ -26,8 +26,6 @@ const AsideMenu = (props) => {
         <ul style={styles.ul}>
             <li style={styles.listItem}><Link href={'/dashboard/create-account'}>Create Account</Link></li>
             <li style={styles.listItem}><Link href={'/dashboard/create-article'}>Create Article</Link></li>
-            <li style={styles.listItem}>Edit Blog</li>
-            <li style={styles.listItem}>Delete Blog</li>
         </ul>
         </div>
     );

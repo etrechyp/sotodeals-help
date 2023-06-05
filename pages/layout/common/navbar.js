@@ -74,7 +74,7 @@ export const Navbar = ({ logout }) => {
     return (
         <div style={styles.navbar}>
         <div style={styles.branding}>
-            <Link style={{cursor: 'pointer'}} href={'/dashboard'}><span style={{ marginRight: '1rem', fontWeight: 'bold' }}>{profile.name}</span></Link>
+            <Link style={{cursor: 'pointer'}} href={'/'}><span style={{ marginRight: '1rem', fontWeight: 'bold' }}>{profile.name}</span></Link>
             <span style={styles.email}>{profile.email}</span>
         </div>
         <div style={styles.linkContainer}>
