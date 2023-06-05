@@ -25,7 +25,7 @@ const AsideMenu = (props) => {
         <div style={styles.container}>
         <ul style={styles.ul}>
             <li style={styles.listItem}><Link href={'/dashboard/create-account'}>Create Account</Link></li>
-            <li style={styles.listItem}>Create Blog</li>
+            <li style={styles.listItem}><Link href={'/dashboard/create-article'}>Create Article</Link></li>
             <li style={styles.listItem}>Edit Blog</li>
             <li style={styles.listItem}>Delete Blog</li>
         </ul>
