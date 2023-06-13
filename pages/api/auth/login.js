@@ -2,6 +2,7 @@ import { connectDB } from '../../../utils/mongodb'
 import User from '../../../models/user'
 import JWT from 'jsonwebtoken'
 import { serialize } from 'cookie'
+import bcryptjs from 'bcryptjs'
 
 connectDB()
 
@@ -12,6 +13,8 @@ export default async function loginHandler(req, res) {
     if (!email || !password) return res.status(400).json({ message: 'Please provide an email and password' })
 
     const user = await User.findOne({ email }).select('+password')
+
+    //TODO: implement bcryptjs to compare password
 
     if (email == user.email && password == user.password) {
 

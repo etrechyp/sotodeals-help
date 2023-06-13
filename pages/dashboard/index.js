@@ -14,36 +14,46 @@ const Dashboardpage = () => {
 
     const styles = {
         buttons: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'left',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'left',
         },
         dashboardContainer: {
-            position : 'fixed',
-            right : '0',
-            boxSizing : 'border-box',
+            boxSizing: 'border-box',
             padding: '20px',
             marginLeft: '210px'
-        }
+        },
+        navbar: {
+            position: 'sticky',
+            top: '0',
+            zIndex: '999',
+            backgroundColor: '#ffffff',
+        },
+        contentContainer: {
+            paddingLeft: '210px',
+        },
     };
 
     return (
         <div>
-            <Navbar />
+            <div style={styles.navbar}>
+                <Navbar />
+            </div>
+            <div style={{ display: 'flex' }}>
+                <AsideMenu />
 
-
-            <AsideMenu />
-
-
-            <Container style={styles.dashboardContainer}>
-                <Grid>
-                    <h1>Dashboard</h1>
-                    <p>Dashboard page content</p>
-                </Grid>
-                <Grid>
-                    <LastArticles />
-                </Grid>
-            </Container>
+                <div style={styles.contentContainer}>
+                    <Container sx={{ marginTop: '20px' }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <h1>Dashboard</h1>
+                                <p>Dashboard page content</p>
+                                <LastArticles />
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </div>
+            </div>
         </div>
     );
 };

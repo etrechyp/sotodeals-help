@@ -4,10 +4,17 @@ import User from '../../../models/user';
 connectDB();
 
 const handleRequest = async (method, req, res) => {
+
+    const { pageNumber, pageSize } = req.query;
+
     switch (method) {
         case 'GET':
         try {
-            const users = await User.find();
+            const users = await User.find({ active: true })
+            .skip((pageNumber - 1) * pageSize)
+            .limit(pageSize)
+            .sort({ createdAt: -1 });
+
             res.status(200).json(users);
         } catch (err) {
             res.status(500).json({ message: err.message });
@@ -18,24 +25,6 @@ const handleRequest = async (method, req, res) => {
         try {
             const user = await User.create(req.body);
             res.status(201).json(user);
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-        break;
-
-        case 'PUT':
-        try {
-            const user = await User.findByIdAndUpdate(req.query.id, req.body, { new: true });
-            res.status(200).json(user);
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-        break;
-
-        case 'DELETE':
-        try {
-            const user = await User.findByIdAndUpdate(req.query.id, { active: false });
-            res.status(200).json(user);
         } catch (err) {
             res.status(500).json({ message: err.message });
         }

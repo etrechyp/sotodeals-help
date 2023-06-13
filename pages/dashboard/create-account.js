@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Navbar from "../layout/common/navbar";
 import AsideMenu from "../layout/common/asideMenu";
-import Container from "../layout/container";
+import { Container } from "@mui/material";
+
 
 const CreateAccountPage = () => {
   const router = useRouter();

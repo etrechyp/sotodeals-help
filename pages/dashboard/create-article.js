@@ -3,8 +3,9 @@ import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import Navbar from "../layout/common/navbar";
 import AsideMenu from "../layout/common/asideMenu";
-import Container from "../layout/container";
 import QuillEditor from "../../utils/quillEditor";
+import { Container, Grid } from "@mui/material";
+
 
 const CreateArticlePage = () => {
     const router = useRouter();
