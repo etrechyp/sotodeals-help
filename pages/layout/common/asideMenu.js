@@ -4,15 +4,21 @@ const AsideMenu = (props) => {
     
     const styles = {
         container: {
-        position: 'fixed',
-        backgroundColor: '#f2f2f2',
-        padding: '20px',
-        width: '200px',
-        height: '100vh'
+            position: 'fixed',
+            backgroundColor: '#ddd',
+            padding: '20px',
+            width: '200px',
+            height: '100vh'
         },
+        link: {
+            color: '#333',
+            textDecoration: 'none',
+            padding: '0.5rem',
+            verticalAlign: 'middle'
+            },
         ul: {
-        padding: '0',
-        margin: '0'
+            padding: '0',
+            margin: '0'
         },
         listItem: {
             listStyleType: 'none',
@@ -24,8 +30,8 @@ const AsideMenu = (props) => {
     return (
         <div style={styles.container}>
         <ul style={styles.ul}>
-            <li style={styles.listItem}><Link href={'/dashboard/create-account'}>Create Account</Link></li>
-            <li style={styles.listItem}><Link href={'/dashboard/create-article'}>Create Article</Link></li>
+            <li style={styles.listItem}><Link style={styles.link} href={'/dashboard/create-account'}>Create Account</Link></li>
+            <li style={styles.listItem}><Link style={styles.link} href={'/dashboard/post-article'}>Create Article</Link></li>
         </ul>
         </div>
     );

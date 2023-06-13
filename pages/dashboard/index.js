@@ -34,6 +34,24 @@ const Dashboardpage = () => {
         },
     };
 
+    const fetchArticle = async (id) => {
+        try {
+          const resp = await axios.get(`/api/articles/${id}`);
+          if (resp.data && Array.isArray(resp.data)) {
+            setArticle(resp.data[0]);
+          } else {
+            console.error('Invalid response data:', resp.data);
+          }
+        } catch (error) {
+          console.error('Error fetching article:', error);
+        }
+      }
+
+    const handleArticleClick = (id) => {
+        fetchArticle(id);
+        router.push(`/articles/${id}`);
+      }
+
     return (
         <div>
             <div style={styles.navbar}>
@@ -47,8 +65,7 @@ const Dashboardpage = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <h1>Dashboard</h1>
-                                <p>Dashboard page content</p>
-                                <LastArticles />
+                                <LastArticles onArticleClick={handleArticleClick} />
                             </Grid>
                         </Grid>
                     </Container>

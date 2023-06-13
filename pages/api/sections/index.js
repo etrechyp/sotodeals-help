@@ -5,19 +5,26 @@ connectDB()
 
 const handleRequest = async (method, req, res) => {
 
-    const { pageNumber, pageSize } = req.query;
-
     switch (method) {
         case 'GET':
             try {
-                const sections = await Section.find({ active: true })
-                    .skip((pageNumber - 1) * pageSize)
-                    .limit(pageSize)
-                    .sort({ createdAt: -1 });
+                const { pageNumber, pageSize, section, name } = req.query;
+                let query = { active: true };
+                
+                if (section) {
+                query.section = section;
+                }
+                
+                if (name) {
+                query.name = { $regex: name, $options: 'i' };
+                }
+
+                const sections = await Section.find(query)
+                .skip((pageNumber - 1) * pageSize)
+                .limit(pageSize);
 
                 res.status(200).json(sections);
-            }
-            catch (err) {
+            } catch (err) {
                 res.status(500).json({ message: err.message });
             }
             break;

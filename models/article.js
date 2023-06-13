@@ -12,13 +12,6 @@ const ArticleSchema = new Schema({
   section: {
     type: Schema.Types.ObjectId,
     ref: 'Section',
-    default: 'other'
-  },
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    trim: true,
-    default: 'admin'
   },
   active: {
     type: Boolean,

@@ -11,7 +11,7 @@ const CreateAccountPage = () => {
 
   const styles = {
     card: {
-      width: "50%",
+      width: "70%",
       margin: "auto",
       padding: "10px",
       marginTop: "50px",
@@ -37,7 +37,20 @@ const CreateAccountPage = () => {
       color: "#fff",
       borderRadius: "5px",
     },
-    
+    dashboardContainer: {
+      boxSizing: 'border-box',
+      padding: '20px',
+      marginLeft: '210px'
+    },
+    navbar: {
+        position: 'sticky',
+        top: '0',
+        zIndex: '999',
+        backgroundColor: '#ffffff',
+    },
+    contentContainer: {
+        paddingLeft: '210px',
+    },
   };
 
   const [credentials, setCredentials] = useState({
@@ -66,8 +79,13 @@ const CreateAccountPage = () => {
 
   return (
     <div>
-      <Navbar />
+      <div style={styles.navbar}>
+        <Navbar />
+      </div>
+      <div style={{ display: 'flex' }}>
       <AsideMenu />
+      </div>
+      <div style={styles.contentContainer}>
       <Container>
         <h1>Create Account</h1>
         <div style={styles.card}>
@@ -79,6 +97,7 @@ const CreateAccountPage = () => {
         </form>
         </div>
       </Container>
+      </div>
     </div>
   );
 };

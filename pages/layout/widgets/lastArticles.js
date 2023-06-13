@@ -6,27 +6,10 @@ import {
   Card,
   CardContent,
   CardActionArea,
-  Typography,
-
+  Typography
 } from "@mui/material";
 
 const LastArticles = ({ onArticleClick }) => {
-  const styles = {
-    container: {
-      width: "100%",
-      margin: "auto",
-      padding: "10px",
-      marginTop: "50px",
-      border: "1px solid #ccc",
-      borderRadius: "5px"
-    },
-    content: {
-      maxHeight: "150px",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "pre-line"
-    }
-  };
 
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,7 +18,6 @@ const LastArticles = ({ onArticleClick }) => {
     try {
       const resp = await axios.get("/api/articles?pageNumber=1&pageSize=3");
       if (resp.data && Array.isArray(resp.data)) {
-        console.log(resp.data);
         setArticles(resp.data);
       } else {
         console.error("Invalid response data:", resp.data);
@@ -57,24 +39,26 @@ const LastArticles = ({ onArticleClick }) => {
 
   return (
     <div>
-      <Container style={styles.container}>
-        <Grid item xs={12} sm={12} lg={12}>
-          <h2>Latest Articles</h2>
+      <Container>
+        <h2>Latest Articles</h2>
+        <Grid container spacing={2}>
           {articles.map((article) => (
-            <Card style={{ margin: "10px" }} key={article._id}>
-                <CardActionArea onClick={(event) => onArticleClick(article._id)}>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {article.name || "No Name"}
-                </Typography>
-                <Typography variant="body" style={styles.content}>
-                  {stripHtmlTags(article.content).length > 300
-                    ? `${stripHtmlTags(article.content).slice(0, 300)}...`
-                    : stripHtmlTags(article.content)}
-                </Typography>
-              </CardContent>
-              </CardActionArea>
-            </Card>
+            <Grid item xs={12} sm={6} md={4} key={article._id}>
+              <Card sx={{ height: 200 }}>
+                <CardActionArea sx={{ height: 200 }} onClick={(event) => onArticleClick(article._id)}>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {article.name || "No Name"}
+                    </Typography>
+                    <Typography variant="body">
+                      {stripHtmlTags(article.content).length > 300
+                        ? `${stripHtmlTags(article.content).slice(0, 300)}...`
+                        : stripHtmlTags(article.content)}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
           ))}
         </Grid>
       </Container>

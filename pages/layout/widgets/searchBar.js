@@ -7,7 +7,7 @@ export const SearchBar = (props) => {
             padding: '3em',
 
             alignItems: 'center',
-            backgroundColor: '#eee'
+            backgroundColor: '#ccc'
         },
         bar: {
             width: '450px',

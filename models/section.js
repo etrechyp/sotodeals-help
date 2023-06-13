@@ -8,6 +8,7 @@ const SectionSchema = new Schema({
     image: {
         type: String,
         trim: true,
+        default: './default.jpg'
     },
     active: {
         type: Boolean,
