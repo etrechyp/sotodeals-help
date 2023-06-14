@@ -84,7 +84,6 @@ const EditArticlePage = () => {
           `http://localhost:3000/api/articles/${id}`
         );
         const fetchedArticle = response.data;
-        console.log(fetchedArticle[0]);
         setArticle(fetchedArticle[0]);
       } catch (error) {
         console.log("Error fetching article:", error);
@@ -120,7 +119,6 @@ const EditArticlePage = () => {
 
     try {
       const res = await axios.put(`http://localhost:3000/api/articles/${id}`, article);
-      console.log(res);
       setArticle({
         name: "",
         section: "",

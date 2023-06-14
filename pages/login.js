@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { Container } from '@mui/material';
+import { 
+    Container,
+    Alert,
+    Snackbar
+} from '@mui/material';
 
 const LoginPage = () => {
     const router = useRouter();
@@ -40,10 +44,14 @@ const LoginPage = () => {
         },
     };
 
+
     const [credentials, setCredentials] = useState({
         email: '',
         password: ''
     });
+
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     const handleChange = (e) => {
         setCredentials({
@@ -54,11 +62,23 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const resp = await axios.post('/api/auth/login', credentials);
+        setError('');
+        setSuccess('');
 
-        if (resp.status === 200) {
-            router.push('/');
+        try {
+            const resp = await axios.post('/api/auth/login', credentials);
+            if (resp.status === 200) {
+                setSuccess('Login successful');
+                router.push('/');
+            }
+        } catch (error) {
+            setError('Invalid email or password');
         }
+    };
+
+    const handleCloseSnackbar = () => {
+        setError('');
+        setSuccess('');
     };
 
     return (
@@ -83,6 +103,11 @@ const LoginPage = () => {
                         Login
                     </button>
                 </form>
+                <Snackbar open={!!error || !!success} autoHideDuration={3000} onClose={handleCloseSnackbar}>
+                    <Alert severity={error ? 'error' : 'success'} onClose={handleCloseSnackbar}>
+                        {error || success}
+                    </Alert>
+                </Snackbar>
             </div>
         </Container>
     );

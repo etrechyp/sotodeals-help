@@ -3,8 +3,10 @@ import {
   useEffect,
   useState
 } from 'react'
+import { useRouter } from 'next/router'
 import Navbar from './layout/common/navbar'
 import SearchBar from './layout/widgets/searchBar'
+import LastArticles from './layout/widgets/lastArticles'
 import {
   Grid,
   Container,
@@ -17,13 +19,30 @@ import {
 
 
 const IndexPage = () => {
+  const router = useRouter()
+
   const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+
+  const fetchArticle = async (id) => {
+    try {
+      const resp = await axios.get(`/api/articles/${id}`);
+      if (resp.data && Array.isArray(resp.data)) {
+        setArticle(resp.data[0]);
+      } else {
+        console.error('Invalid response data:', resp.data);
+      }
+    } catch (error) {
+      console.error('Error fetching article:', error);
+    }
+  }
+
+  const handleArticleClick = (id) => {
+    fetchArticle(id);
+    router.push(`/articles/${id}`);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true)
       try {
         const resp = await axios.get('/api/sections?pageNumber=1&pageSize=10')
         if (resp.data && Array.isArray(resp.data)) {
@@ -35,15 +54,10 @@ const IndexPage = () => {
         console.error('Error fetching data:', error)
         setError(error)
       }
-      setLoading(false)
     }
 
     fetchData()
   }, [])
-
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error loading data: {error.message}</div>
-  
 
   return (
     <div>
@@ -53,7 +67,7 @@ const IndexPage = () => {
       <Container>
         <Grid style={{textAlign: 'center'}} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {data.map((section) => (
-            <Grid item xs={12} sm={6} md={4} key={section._id}>
+            <Grid item xs={12} sm={6} md={4} key={section.name}>
               <Card sx={{ maxWidth: 360 }}>
                 <CardActionArea href={`/sections/${section.name}`}>
                   <CardMedia
@@ -75,6 +89,8 @@ const IndexPage = () => {
             </Grid>
           ))}
         </Grid>
+        <br/>
+        <LastArticles onArticleClick={handleArticleClick} />
       </Container>
     </div>
   )

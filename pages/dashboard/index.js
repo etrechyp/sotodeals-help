@@ -36,21 +36,21 @@ const Dashboardpage = () => {
 
     const fetchArticle = async (id) => {
         try {
-          const resp = await axios.get(`/api/articles/${id}`);
-          if (resp.data && Array.isArray(resp.data)) {
-            setArticle(resp.data[0]);
-          } else {
-            console.error('Invalid response data:', resp.data);
-          }
+            const resp = await axios.get(`/api/articles/${id}`);
+            if (resp.data && Array.isArray(resp.data)) {
+                setArticle(resp.data[0]);
+            } else {
+                console.error('Invalid response data:', resp.data);
+            }
         } catch (error) {
-          console.error('Error fetching article:', error);
+            console.error('Error fetching article:', error);
         }
-      }
+    }
 
     const handleArticleClick = (id) => {
         fetchArticle(id);
         router.push(`/articles/${id}`);
-      }
+    }
 
     return (
         <div>
@@ -59,17 +59,16 @@ const Dashboardpage = () => {
             </div>
             <div style={{ display: 'flex' }}>
                 <AsideMenu />
-
-                <div style={styles.contentContainer}>
-                    <Container sx={{ marginTop: '20px' }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                                <h1>Dashboard</h1>
-                                <LastArticles onArticleClick={handleArticleClick} />
-                            </Grid>
+            </div>
+            <div style={styles.contentContainer}>
+                <Container sx={{ marginTop: '20px' }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <h1>Dashboard</h1>
+                            <LastArticles onArticleClick={handleArticleClick} />
                         </Grid>
-                    </Container>
-                </div>
+                    </Grid>
+                </Container>
             </div>
         </div>
     );

@@ -9,5 +9,5 @@ export default function profileHandler(req, res) {
 
     const user = verify(token, process.env.SECRET);
 
-    return res.status(200).json({name: user.name, email: user.email});
+    return res.status(200).json({name: user.name, email: user.email, role: user.role});
 }

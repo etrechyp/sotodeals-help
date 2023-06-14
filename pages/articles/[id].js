@@ -19,7 +19,6 @@ const ArticleViewPage = () => {
     try {
       const resp = await axios.get(`/api/articles/${id}`);
       if (resp.data && Array.isArray(resp.data)) {
-        console.log(resp.data[0])
         setArticle(resp.data[0]);
       } else {
         console.error('Invalid response data:', resp.data);
@@ -33,7 +32,6 @@ const ArticleViewPage = () => {
     try {
       const resp = await axios.get(`/api/sections/${id}`);
       if (resp.data && Array.isArray(resp.data)) {
-        console.log(resp.data[0])
         setSection(resp.data[0]);
       } else {
         console.error('Invalid response data:', resp.data);
@@ -71,11 +69,12 @@ const ArticleViewPage = () => {
     <div>
       <Navbar />
       <Container>
+      <br/>
       <Breadcrumbs aria-label="breadcrumb">
         <Link underline="hover" color="inherit" href="/">
           sections
         </Link>
-        <Link underline="hover" color="inherit">
+        <Link underline="hover" color="inherit" href={`/sections/${section ? section.name : ''}`}>
           {section ? section.name : ''}
         </Link>
         <Typography color="text.primary">article</Typography>
@@ -92,6 +91,7 @@ const ArticleViewPage = () => {
           <div>Loading...</div>
         )}
       </Container>
+      <br/>
       <LastArticles onArticleClick={handleArticleClick} />
     </div>
   )

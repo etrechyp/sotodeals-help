@@ -16,7 +16,7 @@ const LastArticles = ({ onArticleClick }) => {
 
   const getArticles = async () => {
     try {
-      const resp = await axios.get("/api/articles?pageNumber=1&pageSize=3");
+      const resp = await axios.get("/api/articles?pageNumber=1&pageSize=9");
       if (resp.data && Array.isArray(resp.data)) {
         setArticles(resp.data);
       } else {
@@ -43,16 +43,16 @@ const LastArticles = ({ onArticleClick }) => {
         <h2>Latest Articles</h2>
         <Grid container spacing={2}>
           {articles.map((article) => (
-            <Grid item xs={12} sm={6} md={4} key={article._id}>
-              <Card sx={{ height: 200 }}>
-                <CardActionArea sx={{ height: 200 }} onClick={(event) => onArticleClick(article._id)}>
+            <Grid item xs={12} sm={6} md={4} key={article.name}>
+              <Card sx={{ height: 160 }}>
+                <CardActionArea sx={{ height: 160 }} onClick={(event) => onArticleClick(article._id)}>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                       {article.name || "No Name"}
                     </Typography>
                     <Typography variant="body">
-                      {stripHtmlTags(article.content).length > 300
-                        ? `${stripHtmlTags(article.content).slice(0, 300)}...`
+                      {stripHtmlTags(article.content).length > 220
+                        ? `${stripHtmlTags(article.content).slice(0, 220)}...`
                         : stripHtmlTags(article.content)}
                     </Typography>
                   </CardContent>
@@ -61,6 +61,7 @@ const LastArticles = ({ onArticleClick }) => {
             </Grid>
           ))}
         </Grid>
+        <br />
       </Container>
     </div>
   );

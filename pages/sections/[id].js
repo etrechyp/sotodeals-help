@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Navbar from '../layout/common/navbar';
+import SearchBar from '../layout/widgets/searchBar';
 import { 
   Container,
   Grid,
@@ -18,8 +19,6 @@ const SectionViewPage = () => {
 
   const [section, setSection] = useState({});
   const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [isIdAvailable, setIsIdAvailable] = useState(false);
 
   const fetchSection = async (name) => {
     try {
@@ -49,26 +48,28 @@ const SectionViewPage = () => {
 
   useEffect(() => {
     const id = router.query.id;
-    console.log('id:', id);
 
-    if (id) {
-      setIsIdAvailable(true);
+    if (id !== undefined) {
       fetchSection(id);
-      fetchArticles(section._id);
-      setLoading(false);
     }
-  }, [id]);
+  }, [router.query.id]);
+
+  useEffect(() => {
+    if (section._id) {
+      fetchArticles(section._id);
+    }
+  }, [section]);
 
   const stripHtmlTags = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
   };
 
-  if (!isIdAvailable || loading) return <div>Loading...</div>;
-
   return (
     <div>
       <Navbar />
+      <SearchBar />
+      <br />
       <Container>
         <Breadcrumbs aria-label="breadcrumb">
           <Link underline="hover" color="inherit" href="/">
@@ -82,7 +83,7 @@ const SectionViewPage = () => {
           {articles.map((article, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Card sx={{ height: 225 }}>
-                <CardActionArea href={`/articles/${article._id}`}>
+                <CardActionArea sx={{ height: 225 }} href={`/articles/${article._id}`}>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                       {article.name}
