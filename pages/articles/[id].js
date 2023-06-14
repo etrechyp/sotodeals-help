@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Navbar from '../layout/common/navbar';
 import LastArticles from '../layout/widgets/lastArticles';
+import SearchBar from '../layout/widgets/searchBar';
 import { 
   Container,
   Link,
@@ -80,6 +81,7 @@ const ArticleViewPage = () => {
   return (
     <div>
       <Navbar />
+      <SearchBar />
       <Container>
       <br/>
       <Breadcrumbs aria-label="breadcrumb">
