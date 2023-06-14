@@ -61,7 +61,7 @@ const SearchPage = () => {
         <br/>
         {loading && <p>Loading...</p>}
         {error && <p>Error en la búsqueda: {error.message}</p>}
-        {!loading && !error && searchResults.length === 0 && <p>results don't found</p>}
+        {!loading && !error && searchResults.length === 0 && <p>results dont found</p>}
         {!loading && !error && searchResults.length > 0 && (
           <Grid container spacing={2}>
             {searchResults.map((result) => (
