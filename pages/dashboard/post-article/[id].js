@@ -155,8 +155,8 @@ const EditArticlePage = () => {
                 />
                 <br />
                 <select
-                  id="category"
-                  name="category"
+                  id="section"
+                  name="section"
                   style={styles.input}
                   value={article.section}
                   onChange={handleChange}

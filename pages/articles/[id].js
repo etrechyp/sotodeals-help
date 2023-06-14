@@ -41,6 +41,18 @@ const ArticleViewPage = () => {
     }
   }
 
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    };
+    return date.toLocaleString("en-US", options);
+  };
 
   const formatHtmlContent = (content) => {
     return { __html: content };
@@ -80,7 +92,8 @@ const ArticleViewPage = () => {
         <Typography color="text.primary">article</Typography>
       </Breadcrumbs>
        <h1>{article ? article.name : '' }</h1>
-       {article && (
+       <h5>{article ? formatDate(article.updatedAt) : ''}</h5>
+          {article && (
          <Link href={`/dashboard/post-article/${article._id}`}>Edit</Link>
        )}
         {article ? (

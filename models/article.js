@@ -11,7 +11,7 @@ const ArticleSchema = new Schema({
   },
   section: {
     type: Schema.Types.ObjectId,
-    ref: 'Section',
+    ref: 'Section'
   },
   active: {
     type: Boolean,

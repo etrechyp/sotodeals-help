@@ -173,7 +173,7 @@ const CreateAccountPage = () => {
                 onChange={handleChange}
                 value={credentials.confirmPassword}
               /><br/>
-              <input style={styles.button} type="submit" />
+              <button style={styles.button} type="submit">Submit</button>
             </form>
           </div>
           <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleAlertClose}>
