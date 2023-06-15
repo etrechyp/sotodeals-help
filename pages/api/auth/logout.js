@@ -8,12 +8,11 @@ export default function logoutHandler(req, res) {
         return res.status(401).json({ message: 'Not authorized' })
     }
 
-
     try {
         verify(token, process.env.SECRET)
         const serializedToken = serialize('token', null, {
             httpOnly: true,
-            secure: process.env.NODE_ENV !== 'development',
+            secure: true,
             sameSite: 'strict',
             maxAge: 0,
             path: '/'

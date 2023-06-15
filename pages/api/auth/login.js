@@ -25,7 +25,7 @@ export default async function loginHandler(req, res) {
                 
                 const serializedToken = serialize('token', token, {
                     httpOnly: true,
-                    secure: process.env.NODE_ENV !== 'development',
+                    secure: true,
                     sameSite: 'strict',
                     maxAge: 3600,
                     path: '/'
