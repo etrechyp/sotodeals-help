@@ -8,7 +8,7 @@ import {
     Snackbar
 } from "@mui/material"
 
-const registerPage = () => {
+const RegisterPage = () => {
     const router = useRouter()
 
     const styles = {
