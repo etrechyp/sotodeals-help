@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { 
     Container,
     Alert,
@@ -102,6 +103,7 @@ const LoginPage = () => {
                     <button style={styles.button} type='submit'>
                         Login
                     </button>
+                    <Link href='/register'>register</Link>
                 </form>
                 <Snackbar open={!!error || !!success} autoHideDuration={3000} onClose={handleCloseSnackbar}>
                     <Alert severity={error ? 'error' : 'success'} onClose={handleCloseSnackbar}>
